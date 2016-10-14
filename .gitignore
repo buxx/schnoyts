@@ -1,3 +1,6 @@
 home_assistant_conf_dir/*
 !home_assistant_conf_dir/custom_components
 !home_assistant_conf_dir/configuration.yaml
+
+__pycache__
+

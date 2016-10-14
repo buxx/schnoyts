@@ -118,9 +118,3 @@ group:
       - sensor.humidity
       - sensor.temperature
       - sensor.brightness
-
-panel_custom:
-  - name: hello
-    sidebar_title: Hello World
-    sidebar_icon: mdi:hand-pointing-right
-    url_path: hello
