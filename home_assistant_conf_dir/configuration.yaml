@@ -1,0 +1,126 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 48.8582
+  longitude: 2.3387
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 26
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Paris
+
+# Enables the frontend
+frontend:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+mqtt:
+  broker: 185.133.118.146
+  port: 1883
+
+sensor:
+  - platform: mqtt
+    name: "Temperature"
+    state_topic: "sensors/weather1/temperature/degrees"
+    qos: 0
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    name: "Humidity"
+    state_topic: "sensors/weather1/humidity/percents"
+    qos: 0
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    name: "Pressure"
+    state_topic: "sensors/weather1/pressure/hPa"
+    qos: 0
+    unit_of_measurement: "hPa"
+
+  - platform: mqtt
+    name: "Altitude"
+    state_topic: "sensors/weather1/altitude/meters"
+    qos: 0
+    unit_of_measurement: "m"
+
+  - platform: mqtt
+    name: "dewPoint"
+    state_topic: "sensors/weather1/dewPoint/degrees"
+    qos: 0
+    unit_of_measurement: "°"
+
+  - platform: mqtt
+    name: "pm10"
+    state_topic: "sensors/novapm1/pm10"
+    qos: 0
+    unit_of_measurement: "µg/m3"
+
+  - platform: mqtt
+    name: "pm25"
+    state_topic: "sensors/novapm1/pm25"
+    qos: 0
+    unit_of_measurement: "µg/m3"
+
+  - platform: mqtt
+    name: "brightness"
+    state_topic: "sensors/light1/brightness/mV"
+    qos: 0
+    unit_of_measurement: "mV"
+
+  - platform: mqtt
+    name: "VOCMICS5524"
+    state_topic: "sensors/weather1/airquality/mV"
+    qos: 0
+    unit_of_measurement: "mV"
+
+  - platform: air_quality_score
+
+group:
+  default_view:
+    view: yes
+    entities:
+      - group.airquality
+      - group.other
+
+  airquality:
+    name: 'Air quality'
+    entities:
+      - sensor.air_quality_score
+      - sensor.pm10
+      - sensor.pm25
+      - sensor.vocmics5524
+
+  other:
+    name: 'Autre'
+    entities:
+      - sensor.altitude
+      - sensor.pressure
+      - sensor.dewpoint
+      - sensor.humidity
+      - sensor.temperature
+      - sensor.brightness
+
+panel_custom:
+  - name: hello
+    sidebar_title: Hello World
+    sidebar_icon: mdi:hand-pointing-right
+    url_path: hello
